@@ -1,0 +1,45 @@
+=============== Nov 29, 2023 (UTC) ===============
+08:43:02.473180 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+08:43:02.477375 db@open opening
+08:43:02.477696 version@stat F·[] S·0B[] Sc·[]
+08:43:02.479217 db@janitor F·2 G·0
+08:43:02.479225 db@open done T·1.839508ms
+=============== Nov 29, 2023 (UTC) ===============
+09:05:18.156058 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+09:05:18.156168 version@stat F·[] S·0B[] Sc·[]
+09:05:18.156181 db@open opening
+09:05:18.156207 journal@recovery F·1
+09:05:18.156547 journal@recovery recovering @1
+09:05:18.156712 version@stat F·[] S·0B[] Sc·[]
+09:05:18.163631 db@janitor F·2 G·0
+09:05:18.163638 db@open done T·7.454793ms
+=============== Nov 29, 2023 (UTC) ===============
+09:06:52.119617 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+09:06:52.119673 version@stat F·[] S·0B[] Sc·[]
+09:06:52.119680 db@open opening
+09:06:52.119694 journal@recovery F·1
+09:06:52.119918 journal@recovery recovering @2
+09:06:52.121735 memdb@flush created L0@4 N·8 S·251B "sup..nfo,v6":"tes..\x00n\x00,v3"
+09:06:52.121814 version@stat F·[1] S·251B[251B] Sc·[0.25]
+09:06:52.127689 db@janitor F·3 G·0
+09:06:52.127696 db@open done T·8.014296ms
+=============== Nov 29, 2023 (UTC) ===============
+09:17:52.585899 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+09:17:52.585953 version@stat F·[1] S·251B[251B] Sc·[0.25]
+09:17:52.585959 db@open opening
+09:17:52.585974 journal@recovery F·1
+09:17:52.586150 journal@recovery recovering @5
+09:17:52.587864 memdb@flush created L0@7 N·2 S·167B "sup..nfo,v10":"tes..nfo,v11"
+09:17:52.587950 version@stat F·[2] S·418B[418B] Sc·[0.50]
+09:17:52.593810 db@janitor F·4 G·0
+09:17:52.593820 db@open done T·7.85869ms
+=============== Nov 29, 2023 (UTC) ===============
+09:30:19.245404 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+09:30:19.245524 version@stat F·[2] S·418B[418B] Sc·[0.50]
+09:30:19.245538 db@open opening
+09:30:19.245570 journal@recovery F·1
+09:30:19.245852 journal@recovery recovering @8
+09:30:19.247606 memdb@flush created L0@10 N·2 S·167B "sup..nfo,v13":"tes..nfo,v14"
+09:30:19.247702 version@stat F·[3] S·585B[585B] Sc·[0.75]
+09:30:19.254266 db@janitor F·5 G·0
+09:30:19.254275 db@open done T·8.734165ms

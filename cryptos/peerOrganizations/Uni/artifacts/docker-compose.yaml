@@ -1,0 +1,69 @@
+version: '2'
+volumes:
+  peer0.Uni:
+services:
+    couchdb.Uni:
+        container_name: couchdb.Uni
+        image: couchdb:3.1.1
+        environment:
+            - COUCHDB_USER=admin
+            - COUCHDB_PASSWORD=adminpw
+        ports:
+            - "5011:5984"
+    peer0.Uni:
+        container_name: peer0.Uni
+        image: hyperledger/fabric-peer:2.2.4
+        environment:
+            #Generic peer variables
+            - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+            - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=artifacts_default
+            - CORE_LOGGING_LEVEL=DEBUG
+            - FABRIC_LOGGING_SPEC=DEBUG
+            - CORE_PEER_TLS_ENABLED=true
+            - CORE_LOGGING_GRPC=DEBUG
+            - CORE_PEER_PROFILE_ENABLED=true
+            - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+            - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+            - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+            # Peer specific variabes
+            - CORE_PEER_ID=peer0.Uni
+            - CORE_PEER_ADDRESS=peer0.Uni:7051
+            - CORE_PEER_LISTENADDRESS=peer0.Uni:7051
+            - CORE_PEER_CHAINCODEADDRESS=peer0.Uni:7052
+            - CORE_PEER_CHAINCODELISTENADDRESS=peer0.Uni:7052
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.Uni:7051
+            - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.Uni:7051
+            - CORE_PEER_LOCALMSPID=UniMSP
+            #- CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:13000
+            - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.Uni:5984
+            # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+            # provide the credentials for ledger to connect to CouchDB.  The username and password must
+            # match the username and password set for the associated CouchDB.
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=admin
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw
+        volumes:
+            - /var/run/docker.sock:/host/var/run/docker.sock
+            - ./../peers/peer0.Uni/msp:/etc/hyperledger/fabric/msp
+            - ./../peers/peer0.Uni/tls:/etc/hyperledger/fabric/tls
+            #- peer0.Uni:/etc/hyperledger/production
+            #- ./../peers/peer0.Uni:/var/hyperledger/production
+            - peer0.Uni:/var/hyperledger/production
+        working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+        command: peer node start
+        ports:
+            - 11011:7051
+            - 13011:7053
+            - 16011:7052
+        depends_on:
+            - couchdb.Uni
+    certauth.Uni:
+        image: hyperledger/fabric-ca:latest
+        environment:
+            - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+        ports:
+            - 15011:7054
+        command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.Uni-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/priv_sk -b admin:adminpw'
+        volumes: 
+            - ./../ca/:/etc/hyperledger/fabric-ca-server-config/
+        container_name: certauth.Uni
